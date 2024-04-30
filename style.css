@@ -1,0 +1,596 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* Define font */
+@font-face {
+    font-family: 'DragonHunter';
+    src: url('DragonHunter.otf');
+}
+
+/* Define variables */
+:root {
+    --card-height: 30vw;
+}
+
+/* Define body grid areas */
+body {
+    display: grid;
+    grid-template-areas: 
+        "a a a a a a a"
+        "b b b b b b b"
+        "c c c c c c c"
+        ". d d d d d ."
+        "e e e e e e e"
+        "f f f f f f f"
+        "g g g g g g g";
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    background: aliceblue;
+    perspective: 1000px;
+    perspective-origin: 50% 50%;
+}
+
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0);
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 20px;
+  }
+
+  /* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+#logo {
+    opacity: 0.1;
+    position: absolute;
+    margin: -103px;
+}
+
+h1 {
+    font-family: 'DragonHunter', sans-serif;
+    font-size: 4rem;
+    grid-area: a;
+    text-align: center;
+    box-sizing: border-box;
+    padding-top: 50px;
+
+}
+
+#powered {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1rem;
+    grid-area: b;
+    text-align: center;
+    box-sizing: border-box;
+    padding-bottom: 50px;
+}
+
+#details {
+    font-family: 'Raleway', sans-serif;
+    grid-area: c;
+    font-size: 1rem;
+    text-align: center;
+}
+
+#form {
+    grid-area: d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    padding-top: 40px;
+}
+
+
+input[type="radio"] {
+    display: none;
+}
+
+
+#prompt {
+    font-family: 'Sedan', sans-serif;
+    font-size: 2rem;
+    box-sizing: border-box;
+    padding: 30px;
+    outline: none;
+    border: none;
+    border-radius:  calc(2rem + 60px) 0 0 calc(2rem + 60px);
+    box-shadow: 0 0 10px rgba(185, 185, 185, 0.1) inset;
+    width: 65%;
+}
+
+.dropdown {
+    display: flex;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.3rem;
+    box-sizing: border-box;
+    width: 25%;
+    height: calc(2rem + 66px);
+    padding: 30px;
+    background: rgb(255, 24, 24);
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: all 0.2s linear;
+    cursor: pointer;
+    user-select: none;
+}
+
+.dropdown:hover {
+    background: white;
+    color: black;
+}
+
+#selected {
+    position: relative;
+    z-index: 100;
+    cursor: pointer;
+    list-style: none;
+}
+
+.dropdown-content {
+    position: absolute;
+    z-index: 10;
+    transition: all 0.5s ease-in-out;
+    list-style: none;
+    background: white;
+    padding: 40px;
+    transform: translateY(50%) translateX(-4px);
+}
+
+.dropdown-content li {
+    padding: 10px;
+    cursor: pointer;
+    color: black;
+}
+
+.dropdown-content li:hover {
+    background: #f9f9f9;
+}
+
+.dropdown-content li:active {
+    background: #1d77ff;
+}
+
+.dropdown-content li label {
+    cursor: pointer;
+}
+
+
+.hidden {
+    transform: translateY(48%) translateX(-4px);
+    opacity: 0;
+    z-index: -1;
+}
+
+#send {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    font-size: 1.3rem;
+    box-sizing: border-box;
+    width: 10%;
+    height: calc(2rem + 66px);
+    padding: 30px;
+    outline: none;
+    border: none;
+    border-radius: 0 calc(2rem + 60px) calc(2rem + 60px) 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) inset;
+    background: #1d77ff;
+    cursor: pointer;
+    color: white;
+
+}
+
+#send img {
+    position: relative;
+    height: 100%;
+    filter: brightness(0) invert(1);
+    transform: rotate(20deg);
+    transition: all 0.3s ease-in-out;
+}
+
+#send:hover img {
+    transform: rotate(0deg);
+}
+
+#disclaimer {
+    grid-area: e;
+    font-family: 'Raleway', sans-serif;
+    font-size: 0.7rem;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 20px;
+    color: rgb(189, 189, 189)
+}
+
+
+#card {
+    background: white;
+    box-sizing: border-box;
+    margin: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    grid-area: f;
+    display: flex;
+    flex-wrap: wrap;
+    height: var(--card-height);
+    container-name: card;
+    transition: 0.3s;
+}
+
+#copy-btn {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+
+#copy-btn::after {
+    font-family: 'Raleway', sans-serif;
+    content: 'Copy';
+    position: absolute;
+    top: 120%;
+    left: -50%;
+    padding: 5px 10px;
+    color: aliceblue;
+    background: black;
+    background-size: contain;
+    font-size: 0.8rem;
+    opacity: 0;
+    border-radius: 10px;
+    transition: all 0.1s;
+    transform: translate(0, -50%);
+}
+
+#copy-btn:hover::after {
+    opacity: 0.3;
+    transform: translate(0,0);
+}
+
+#copy-btn img {
+    position: relative;
+    width: 100%;
+    transition: all 0.1s;
+}
+
+#copy-btn:hover img{
+    filter: invert(54%) sepia(68%) saturate(4350%) hue-rotate(197deg) brightness(101%) contrast(101%);
+}
+
+#image {
+    position: relative;
+    border-radius: 20px 0 0 20px;
+    height: 100%;
+}
+
+#info-card {
+    display: flex;
+    flex-flow: column;
+    box-sizing: border-box;
+    padding: 20px;
+    width: calc(100% - var(--card-height));
+    height: 100%;
+    overflow-y: scroll;
+}
+
+#name {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.5rem;
+    padding: 20px;
+    font-weight: bold;
+    color: red;
+}
+
+.epi-class {
+    font-family: 'Sedan', sans-serif;
+    font-size: 2rem;
+    font-style: italic;
+    color: rgb(31, 31, 31);
+
+}
+
+#race {
+    grid-area: c;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    padding: 20px;
+    border-bottom: 1px solid rgb(189, 189, 189);
+}
+
+#stat_block {
+    grid-area: d;
+    padding: 20px;
+}
+
+.stats {
+    font-family: 'Raleway', sans-serif;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    background: red;
+    margin: 10px;
+    float: left;
+    padding: 20px;
+    border-radius: 13px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+
+.skill {
+    font-weight: bold;
+    color: white;
+}
+
+.score {
+    font-size: 2rem;
+
+}
+
+#description {
+    grid-area: e;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.1rem;
+    padding: 20px;
+    border-top: 1px solid rgb(189, 189, 189);
+}
+
+#background {
+    grid-area: f;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.1rem;
+    padding: 20px;
+}
+
+#closest_monster {
+    grid-area: g;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 20px;
+}
+
+#fixed {
+    font-weight: normal;
+    color: red;
+}
+
+#footer {
+    grid-area: g;
+    height: 50px;
+    background: #ffffff9a;
+    box-sizing: border-box;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Raleway', sans-serif;
+    color: rgb(201, 199, 199);
+    font-size: 0.8rem;
+}
+
+#info2 a {
+    color: rgb(143, 141, 141);
+    text-decoration: dotted;
+}
+
+#info3 {
+    height: 100%;
+}
+
+#footer img {
+    position: relative;
+    height: 100%
+}
+
+
+#card-skeleton {
+    grid-area: f;
+    display: flex;
+    background: white;
+    height: var(--card-height);
+    margin: 30px;
+    border-radius: 20px;
+    transition: 0.3s;
+    display: none;
+    opacity: 0;
+}
+
+#image-skeleton {
+    border-radius: 20px 0 0 20px;
+    height: 100%;
+    width: 30%;
+    background-color: rgba(139,139,139,1);
+    background-image: linear-gradient(90deg, rgba(139,139,139,1) 0%, rgba(179,179,179,1) 40%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 54%, rgba(179,179,179,1) 70%, rgba(139,139,139,1) 100%);
+    background-size: 200% 100%; /* Extend the background size to twice its original width */
+    animation: scrollGradient 3s linear infinite; /* Apply the animation */
+    opacity: 0.2;
+}
+
+#info-card-skeleton {
+    display: flex;
+    flex-flow: column;
+    padding: 20px;
+    width: 70%;
+    height: 100%;
+}
+
+#name-skeleton {
+    width: 50%;
+    height: 80px;
+    background-color: rgba(139,139,139,1);
+    background-image: linear-gradient(90deg, rgba(139,139,139,1) 0%, rgba(179,179,179,1) 40%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 54%, rgba(179,179,179,1) 70%, rgba(139,139,139,1) 100%);
+    background-size: 200% 100%; /* Extend the background size to twice its original width */
+    animation: scrollGradient 3s linear infinite; /* Apply the animation */
+    opacity: 0.2;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+#race-skeleton {
+    width: 30%;
+    height: 40px;
+    background-color: rgba(139,139,139,1);
+    background-image: linear-gradient(90deg, rgba(139,139,139,1) 0%, rgba(179,179,179,1) 40%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 54%, rgba(179,179,179,1) 70%, rgba(139,139,139,1) 100%);
+    background-size: 200% 100%; /* Extend the background size to twice its original width */
+    animation: scrollGradient 3s linear infinite; /* Apply the animation */
+    opacity: 0.2;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-color: rgba(139,139,139,1);
+    background-image: linear-gradient(90deg, rgba(139,139,139,1) 0%, rgba(179,179,179,1) 40%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 54%, rgba(179,179,179,1) 70%, rgba(139,139,139,1) 100%);
+    background-size: 200% 100%; /* Extend the background size to twice its original width */
+    animation: scrollGradient 3s linear infinite; /* Apply the animation */
+    opacity: 0.2;
+    margin: 10px;
+}
+
+.line-skeleton {
+    width: 95%;
+    height: 15px;
+    background-color: rgba(139,139,139,1);
+    background-image: linear-gradient(90deg, rgba(139,139,139,1) 0%, rgba(179,179,179,1) 40%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 54%, rgba(179,179,179,1) 70%, rgba(139,139,139,1) 100%);
+    background-size: 200% 100%; /* Extend the background size to twice its original width */
+    animation: scrollGradient 3s linear infinite; /* Apply the animation */
+    opacity: 0.2;
+    margin: 10px;
+    border-radius: 10px;
+
+}
+
+/* last line needs to be a bit shorter */
+.line-skeleton:last-child {
+    width: 70%;
+}
+
+#stats-skeleton {
+    display: flex;
+    flex-flow: row;
+    margin: 10px;
+}
+
+.box-skeleton {
+    height: 100px;
+    width: 100px;
+    background-color: rgba(139,139,139,1);
+    background-image: linear-gradient(90deg, rgba(139,139,139,1) 0%, rgba(179,179,179,1) 40%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 54%, rgba(179,179,179,1) 70%, rgba(139,139,139,1) 100%);
+    background-size: 200% 100%; /* Extend the background size to twice its original width */
+    animation: scrollGradient 3s linear infinite; /* Apply the animation */
+    opacity: 0.2;
+    border-radius: 20px;
+    margin: 10px;
+    
+}
+
+.last-line {
+    width: 20%;
+    height: 15px;
+    background-color: rgba(139,139,139,1);
+    background-image: linear-gradient(90deg, rgba(139,139,139,1) 0%, rgba(179,179,179,1) 40%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 54%, rgba(179,179,179,1) 70%, rgba(139,139,139,1) 100%);
+    background-size: 200% 100%; /* Extend the background size to twice its original width */
+    animation: scrollGradient 3s linear infinite; /* Apply the animation */
+    opacity: 0.2;
+    margin: 30px;
+    border-radius: 10px;
+}
+
+/* Define media queries */
+@media screen and (max-width: 1100px){
+    #send {
+        width: 15%;
+    }
+    .dropdown{
+        font-size: 1.1rem;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    :root {
+        --card-height: 100vw;
+    }
+
+    body {
+        padding: 50px;
+    }
+
+    #form {
+        flex-flow: column;
+    }
+
+    #prompt {
+        width: 100%;
+        border-radius: calc(2rem + 60px);
+        margin-bottom: 20px;
+    }
+    .dropdown {
+        width: 100%;
+        border-radius: calc(2rem + 60px);
+        margin-bottom: 20px;
+        font-size: 1rem;
+    }
+
+    #send {
+        width: 15vw;
+        height: 15vw;
+        border-radius: 100%;
+        padding: 20px;
+    }
+
+    #card {
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+    #image {
+        border-radius: 20px 20px 0 0;
+        height:auto;
+        width: 100%;
+    }
+    #info-card {
+        width: 100%;
+        height: auto;
+        overflow-y: hidden;
+        overflow-x: hidden;
+
+
+    }
+
+    #footer {
+        margin: 0 -50px -50px -50px;
+        font-size: 0.6rem;
+        padding: 10px;
+    }
+}
+
+
+/* Define keyframes */
+@keyframes scrollGradient {
+    0% {
+        background-position: 200% 50%; /* Start with the gradient shifted to the right */
+    }
+    100% {
+        background-position: 0% 50%; /* End with the gradient fully shifted to the left */
+    }
+}
